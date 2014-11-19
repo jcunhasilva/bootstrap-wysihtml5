@@ -52,8 +52,14 @@
                   "<h3>" + locale.link.insert + "</h3>" +
                 "</div>" +
                 "<div class='modal-body'>" +
-                  "<input value='http://' class='bootstrap-wysihtml5-insert-link-url input-xlarge'>" +
-                  "<label class='checkbox'> <input type='checkbox' class='bootstrap-wysihtml5-insert-link-target' checked>" + locale.link.target + "</label>" +
+                  "<div class='row-fluid'>" +
+                    "<div class='span7'>" +
+                      "<input value='http://' class='bootstrap-wysihtml5-insert-link-url input-xlarge'>" +
+                    "</div>" +
+                    "<div class='span5'>" +
+                      "<label class='checkbox inline'> <input type='checkbox' style='margin-top:3px;' class='bootstrap-wysihtml5-insert-link-target' checked>" + locale.link.target + "</label>" +
+                    "</div>" +
+                  "</div>" +
                 "</div>" +
                 "<div class='modal-footer'>" +
                   "<a href='#' class='btn' data-dismiss='modal'>" + locale.link.cancel + "</a>" +
@@ -201,6 +207,10 @@
             if(options.toolbar) {
                 for(key in options.toolbar) {
                     toolbar.append(options.toolbar[key]);
+        
+                    if ((options.initCallbacks || {})[key]) {
+                        options.initCallbacks[key].apply({}, [toolbar]);
+                    }
                 }
             }
 
